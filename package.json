@@ -1,0 +1,21 @@
+{
+  "name": "bf-fresh-friday",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "get-data": "ts-node -r tsconfig-paths/register ./src/scripts/get-data.ts",
+    "start": "yarn run get-data"
+  },
+  "repository": "git@github.com:Crockery/bf-fresh-friday.git",
+  "author": "Ryan Crockett <ryan.crockett8@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/snoowrap": "^1.19.0",
+    "snoowrap": "^1.20.1",
+    "ts-node": "^8.6.2",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4"
+  }
+}

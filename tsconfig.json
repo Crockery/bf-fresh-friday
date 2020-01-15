@@ -1,0 +1,42 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "downlevelIteration": true,
+        "importHelpers": true,
+        "removeComments": false,
+        "esModuleInterop": true,
+        // "declaration": true,
+        // "declarationMap": true,
+        "strictNullChecks": true,
+        "noImplicitUseStrict": true,
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedParameters": false,
+        "noErrorTruncation": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowJs": false,
+        "checkJs": false,
+        "baseUrl": "./",
+        "rootDir": "./src",
+        "lib": ["es2016", "es2018", "dom.iterable", "dom"],
+        "plugins": [
+            {
+            "name": "typescript-styled-plugin"
+            }
+        ],
+        "paths": {
+            "~/*": ["src/*"],
+            "~chain/*": ["../chain/*"],
+            "~game/*": ["../game/src/*"]
+        }
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"],
+}

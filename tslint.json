@@ -1,0 +1,88 @@
+{
+    "defaultSeverity": "warning",
+    "extends": ["tslint:recommended"],
+    "linterOptions": {
+        "exclude": [
+        "../chain/**",
+        "../game/**",
+        "../state/**"
+        ]
+    },
+    "rules": {
+        "class-name": true,
+        "comment-format": [
+            false,
+            "check-space"
+        ],
+        "curly": false,
+        "indent": [true, "spaces", 2],
+        "interface-name": false,
+        "jsdoc-format": true,
+        "no-console": false,
+        "no-consecutive-blank-lines": false,
+        "no-debugger": true,
+        "no-duplicate-variable": true,
+        "no-eval": true,
+        "no-internal-module": true,
+        "no-trailing-whitespace": false,
+        "no-shadowed-variable": false,
+        "no-switch-case-fall-through": true,
+        "no-unused-expression": false,
+        "no-use-before-declare": false,
+        "no-var-keyword": true,
+        "import-name": false,
+        "jsx-no-multiline-js": false,
+        "jsx-no-lambda": false,
+        "max-classes-per-file": false,
+        "object-literal-sort-keys": false,
+        "ordered-imports": false,
+        "one-line": [
+            true,
+            "check-open-brace",
+            "check-whitespace",
+            "check-catch"
+        ],
+        "quotemark": [
+            true,
+            "single",
+            "jsx-double"
+        ],
+        "semicolon": [true, "never"],
+        "trailing-comma": [
+        true,
+        {
+            "multiline": "never",
+            "singleline": "never"
+        }
+        ],
+        "triple-equals": [
+            true,
+            "allow-null-check"
+        ],
+        "arrow-parens": [true, "ban-single-arg-parens"],
+        "member-access": [true, "no-public"],
+        "typedef-whitespace": [
+        true,
+        {
+            "call-signature": "nospace",
+            "index-signature": "nospace",
+            "parameter": "nospace",
+            "property-declaration": "nospace",
+            "variable-declaration": "nospace"
+        }
+        ],
+        "no-string-literal": false,
+        "variable-name": [
+            true,
+            "ban-keywords"
+        ],
+        "whitespace": [
+        true,
+            "check-branch",
+            "check-decl",
+            "check-separator",
+            "check-type",
+            "check-open-brace"
+        ]
+    }
+}
