@@ -18,7 +18,7 @@ const sub = r.getSubreddit('hiphopheads')
 export const getAllPosts = (query: string, excludeTerms: string[]): Promise<string[]> => {
   return new Promise((resolve, reject) => {
     sub.search({
-      query,
+      query: `title:"${query}"`,
       time: 'week',
       sort: 'new'
     }).then(res => res.fetchMore({
@@ -31,8 +31,12 @@ export const getAllPosts = (query: string, excludeTerms: string[]): Promise<stri
           const since = daysSince(post.created)
           return since < 7
         })
-        .map(post => post.title)
-        .filter(title => !title.includes(excludeTerms[0]) && !title.includes(excludeTerms[1]))
+        .sort((a, b) => b.ups - a.ups)
+        .map(post => `${post.title} (${post.ups})`)
+        .filter(title => !title.toLowerCase().includes(excludeTerms[0].toLowerCase()) &&
+          !title.toLowerCase().includes(excludeTerms[1].toLowerCase()) &&
+          title.toLowerCase().includes(query.toLowerCase())
+        )
 
       resolve(uniqWith(posts, (a, b) => {
         const similarity = compareTwoStrings(a, b)

@@ -1,16 +1,17 @@
 import { getAllPosts } from '../lib'
+import { formatTitle } from '../helpers'
 
 async function run() {
   try {
-    const freshSingles = await getAllPosts('title:"[FRESH]"', ['VIDEO', 'ALBUM'])
-    const freshAlbums = await getAllPosts('title:"[FRESH ALBUM]"', ['VIDEO', '[FRESH]'])
-    const freshVideos = await getAllPosts('title:"[FRESH VIDEO]"', ['ALBUM', '[FRESH]'])
+    let singles = await getAllPosts('[FRESH]', ['VIDEO', 'ALBUM'])
+    let albums = await getAllPosts('[FRESH ALBUM]', ['VIDEO', '[FRESH]'])
+    let videos = await getAllPosts('[FRESH VIDEO]', ['ALBUM', '[FRESH]'])
 
-    console.log({
-      videos: freshVideos.length,
-      singles: freshSingles.length,
-      albums: freshAlbums.length
-    })
+    singles = singles.map(title => formatTitle(title))
+    albums = albums.map(title => formatTitle(title))
+    videos = videos.map(title => formatTitle(title))
+
+    console.log(singles)
   } catch (e) {
     console.log(e)
   }
