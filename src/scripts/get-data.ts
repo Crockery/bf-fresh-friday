@@ -7,9 +7,9 @@ async function run() {
     let albums = await getAllPosts('[FRESH ALBUM]', ['VIDEO', '[FRESH]'])
     let videos = await getAllPosts('[FRESH VIDEO]', ['ALBUM', '[FRESH]'])
 
-    singles = singles.map(title => formatTitle(title))
-    albums = albums.map(title => formatTitle(title))
-    videos = videos.map(title => formatTitle(title))
+    singles = singles.map(formatTitle)
+    albums = albums.map(formatTitle)
+    videos = videos.map(formatTitle)
 
     console.log(singles)
   } catch (e) {
