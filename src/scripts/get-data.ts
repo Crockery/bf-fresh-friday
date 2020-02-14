@@ -1,6 +1,8 @@
 import { getAllPosts } from '../lib'
 import { formatTitle } from '../helpers'
 
+import path from 'path'
+
 async function run() {
   try {
     let singles = await getAllPosts('[FRESH]', ['VIDEO', 'ALBUM'])

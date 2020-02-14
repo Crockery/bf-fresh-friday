@@ -13,5 +13,8 @@ export const formatTitle = (title: string): string => {
   if (title.includes('[FRESH]')) newTitle = title.replace('[FRESH]', '')
   if (title.includes('[FRESH ALBUM]')) newTitle = title.replace('[FRESH ALBUM]', '')
   if (title.includes('[FRESH VIDEO]')) newTitle = title.replace('[FRESH VIDEO]', '')
+  if (title.includes('[Fresh]')) newTitle = title.replace('[Fresh]', '')
+  if (title.includes('[Fresh Album]')) newTitle = title.replace('[Fresh Album]', '')
+  if (title.includes('[Fresh Video]')) newTitle = title.replace('[Fresh Video]', '')
   return newTitle.trim()
 }

@@ -32,7 +32,7 @@ export const getAllPosts = (query: string, excludeTerms: string[]): Promise<stri
           return since < 7
         })
         .sort((a, b) => b.ups - a.ups)
-        .map(post => `${post.title} (${post.ups})`)
+        .map(post => post.title)
         .filter(title => !title.toLowerCase().includes(excludeTerms[0].toLowerCase()) &&
           !title.toLowerCase().includes(excludeTerms[1].toLowerCase()) &&
           title.toLowerCase().includes(query.toLowerCase())
