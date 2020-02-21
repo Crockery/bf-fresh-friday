@@ -11,6 +11,7 @@
   "author": "Ryan Crockett <ryan.crockett8@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^13.7.1",
     "@types/snoowrap": "^1.19.0",
     "lodash": "^4.17.15",
     "snoowrap": "^1.20.1",

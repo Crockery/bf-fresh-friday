@@ -1,6 +1,8 @@
 import snoowrap from 'snoowrap'
 import { compareTwoStrings } from 'string-similarity'
 import uniqWith from 'lodash/uniqWith'
+import fs from 'fs'
+import path from 'path'
 
 import { CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN } from './etc/conf'
 
@@ -31,6 +33,7 @@ export const getAllPosts = (query: string, excludeTerms: string[]): Promise<stri
           const since = daysSince(post.created)
           return since < 7
         })
+        .filter(post => post.ups > 1)
         .sort((a, b) => b.ups - a.ups)
         .map(post => post.title)
         .filter(title => !title.toLowerCase().includes(excludeTerms[0].toLowerCase()) &&
@@ -44,5 +47,29 @@ export const getAllPosts = (query: string, excludeTerms: string[]): Promise<stri
         return similarity > 0.8
       }))
     }).catch(e => reject(e))
+  })
+}
+
+export const writeList = (songs, albums, videos): Promise<any> => {
+  const targetFile = path.resolve(__dirname, './posts/post.txt')
+
+  return new Promise((res, rej) => {
+    const stream = fs.createWriteStream(targetFile, { encoding: 'utf8', flags: 'w' })
+    stream.write(`[FRESH MUSIC FRIDAY]
+
+Here are the albums, singles, and videos (to older songs) that dropped this week.
+
+If you've releasing some music, or know someone who is and want it included in this post, please do DM me! Otherwise feel free to drop it in the comments.
+
+[ALBUMS]
+${albums.map(album => `${album}\r\n`)}
+
+[SINGLES]
+${songs.map(song => `${song}\r\n`)}
+
+[VIDEOS]
+${videos.map(video => `${video}\r\n`)}
+`)
+    stream.on('finish', res)
   })
 }
