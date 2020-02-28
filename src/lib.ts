@@ -33,7 +33,7 @@ export const getAllPosts = (query: string, excludeTerms: string[]): Promise<stri
           const since = daysSince(post.created)
           return since < 7
         })
-        .filter(post => post.ups > 1)
+        .filter(post => post.ups > 5)
         .sort((a, b) => b.ups - a.ups)
         .map(post => post.title)
         .filter(title => !title.toLowerCase().includes(excludeTerms[0].toLowerCase()) &&
@@ -43,8 +43,8 @@ export const getAllPosts = (query: string, excludeTerms: string[]): Promise<stri
 
       resolve(uniqWith(posts, (a, b) => {
         const similarity = compareTwoStrings(a, b)
-        if (similarity > 0.8) console.log(a, b)
-        return similarity > 0.8
+        if (similarity > 0.85) console.log(a, b)
+        return similarity > 0.85
       }))
     }).catch(e => reject(e))
   })
