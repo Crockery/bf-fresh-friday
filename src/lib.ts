@@ -62,13 +62,13 @@ Here are the albums, singles, and videos (to older songs) that dropped this week
 If you've releasing some music, or know someone who is and want it included in this post, please do DM me! Otherwise feel free to drop it in the comments.
 
 [ALBUMS]
-${albums.map(album => `${album}\r\n`)}
+${albums.join(`\r\n`)}
 
 [SINGLES]
-${songs.map(song => `${song}\r\n`)}
+${songs.join(`\r\n`)}
 
 [VIDEOS]
-${videos.map(video => `${video}\r\n`)}
+${videos.join(`\r\n`)}
 `)
     stream.on('finish', res)
   })
