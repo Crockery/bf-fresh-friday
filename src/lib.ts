@@ -59,7 +59,7 @@ export const writeList = (songs, albums, videos): Promise<any> => {
 
 Here are the albums, singles, and videos (to older songs) that dropped this week.
 
-If you've releasing some music, or know someone who is and want it included in this post, please do DM me! Otherwise feel free to drop it in the comments.
+If you're releasing some music, or know someone who is and want it included in this post, please do DM me! Otherwise feel free to drop it in the comments.
 
 [ALBUMS]
 ${albums.join(`\r\n`)}
