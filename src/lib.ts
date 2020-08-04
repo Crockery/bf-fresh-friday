@@ -3,19 +3,31 @@ import { compareTwoStrings } from 'string-similarity'
 import uniqWith from 'lodash/uniqWith'
 import fs from 'fs'
 import path from 'path'
+import SpotifyWebApi from 'spotify-web-api-node'
 
-import { CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN } from './etc/conf'
+import {
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REFRESH_TOKEN,
+  SPOTIFY_CLIENT_ID,
+  SPOTIFY_CLIENT_SECRET
+} from './etc/conf'
 
 import { daysSince } from './helpers'
 
-const r = new snoowrap({
+const reddit = new snoowrap({
   refreshToken: REFRESH_TOKEN,
   clientId: CLIENT_ID,
   clientSecret: CLIENT_SECRET,
   userAgent: '100gecs'
 })
 
-const sub = r.getSubreddit('hiphopheads')
+const spotify = new SpotifyWebApi({
+  clientId: SPOTIFY_CLIENT_ID,
+  clientSecret: SPOTIFY_CLIENT_SECRET
+})
+
+const sub = reddit.getSubreddit('hiphopheads')
 
 export const getAllPosts = (query: string, excludeTerms: string[]): Promise<string[]> => {
   return new Promise((resolve, reject) => {
@@ -48,6 +60,17 @@ export const getAllPosts = (query: string, excludeTerms: string[]): Promise<stri
       }))
     }).catch(e => reject(e))
   })
+}
+
+export const getSpotifyData = async () => {
+  const data = await spotify.getNewReleases({
+    country: 'CA',
+    limit: 80
+  }).then(_data => {
+    console.log(_data.body)
+    return _data
+  })
+  console.log(data)
 }
 
 export const writeList = (songs, albums, videos): Promise<any> => {
