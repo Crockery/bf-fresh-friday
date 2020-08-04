@@ -57,9 +57,24 @@ export const writeList = (songs, albums, videos): Promise<any> => {
     const stream = fs.createWriteStream(targetFile, { encoding: 'utf8', flags: 'w' })
     stream.write(`[FRESH MUSIC FRIDAY]
 
-Here are the albums, singles, and videos (to older songs) that dropped this week.
+Here are the albums, singles that dropped this week.
 
 If you're releasing some music, or know someone who is and want it included in this post, please do DM me! Otherwise feel free to drop it in the comments.
+
+𝕮𝖆𝖓𝖆𝖉𝖆
+[ᴀʟʙᴜᴍs]
+
+[sɪɴɢʟᴇs]
+
+𝕿𝖍𝖊 𝖀.𝕶.
+[ᴀʟʙᴜᴍs]
+
+[sɪɴɢʟᴇs]
+
+𝕿𝖍𝖊 𝕽𝖊𝖘𝖙
+[ᴀʟʙᴜᴍs]
+
+[sɪɴɢʟᴇs]
 
 [ALBUMS]
 ${albums.join(`\r\n`)}
