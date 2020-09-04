@@ -1,26 +1,28 @@
-import { getAllPosts, writeList, getSpotifyData } from '../lib'
-import { formatTitle } from '../helpers'
+import { getRedditData } from '../lib/reddit'
+import { writeList } from '../lib/post'
+import { getSpotifyData } from '../lib/spotify'
+
+import { formatTitle, redditDataToNameAndArtist } from '../helpers'
 
 async function run() {
   try {
-    let singles = await getAllPosts('[FRESH]', ['VIDEO', 'ALBUM'])
-    let albums = await getAllPosts('[FRESH ALBUM]', ['VIDEO', '[FRESH]'])
-    let videos = await getAllPosts('[FRESH VIDEO]', ['ALBUM', '[FRESH]'])
+    let { tracks, albums } = await getRedditData()
 
-    singles = singles.map(formatTitle)
+    tracks = tracks.map(formatTitle)
     albums = albums.map(formatTitle)
-    videos = videos.map(formatTitle)
 
-    await writeList(singles, albums, videos)
+    console.log(tracks)
 
-    console.log(singles)
+    const singlesData = redditDataToNameAndArtist(tracks, false)
+    const albumData = redditDataToNameAndArtist(albums, true)
+
+    // await writeList(singles, albums)
 
     // await getSpotifyData()
 
   } catch (e) {
     console.log(e)
   }
-
 }
 
 run()

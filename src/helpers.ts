@@ -1,4 +1,8 @@
+import { MusicInfo } from './types'
 
+export function notUndefined<T>(x: T | undefined): x is T {
+  return x !== undefined
+}
 
 export const daysSince = (utcNum: number): number => {
   const oneDay = 1000 * 60 * 60 * 24 
@@ -17,4 +21,32 @@ export const formatTitle = (title: string): string => {
   if (title.includes('[Fresh Album]')) newTitle = title.replace('[Fresh Album]', '')
   if (title.includes('[Fresh Video]')) newTitle = title.replace('[Fresh Video]', '')
   return newTitle.trim()
+}
+
+export const redditDataToNameAndArtist = (
+  redditData: string[], isAlbum: boolean
+): Array<{ name: string, artist: string, isAlbum: boolean }> => {
+  return redditData.map(data => {
+    let betterData: string | undefined
+
+    if (data.includes(' - ')) {
+      betterData = data.replace(' - ', '///')
+    } else if (data.includes(' -- ')) {
+      betterData = data.replace(' -- ', '///')
+    } else if (data.includes('- ')) {
+      betterData = data.replace('- ', '///')
+    }
+    
+    if (betterData === undefined) {
+      console.log(data)
+      return
+    }
+    const [artist, name] = betterData.split('///')
+    
+    return {
+      name,
+      artist,
+      isAlbum
+    }
+  }).filter(notUndefined)
 }
