@@ -115,11 +115,15 @@ export const getRedditData = async (): Promise<{ tracks: string[], albums: strin
   const { tracks: indieheadsTracks, albums: indieheadsAlbums } = await getIndieHeads()
   const { tracks: pcmusicTracks, albums: pcmusicAlbums } = await getPcMusic()
 
-  const combinedTracks: string[] = [
-    ...hhhTracks,
+  const combinedAdjacentTracks = [
     ...popheadsTracks,
     ...indieheadsTracks,
     ...pcmusicTracks
+  ].map(track => ({ ...track, title: `${track.title} 🖇`}))
+
+  const combinedTracks: string[] = [
+    ...hhhTracks,
+    ...combinedAdjacentTracks
   ].sort((a, b) => b.ups - a.ups)
   .map(track => track.title)
 
@@ -128,13 +132,17 @@ export const getRedditData = async (): Promise<{ tracks: string[], albums: strin
     return similarity > 0.85
   })
 
-  const combinedAlbums: string[] = [
-    ...hhhAlbums,
+  const combinedAdjacentAlbums = [
     ...popheadsAlbums,
     ...indieheadsAlbums,
     ...pcmusicAlbums
+  ].map(album => ({ ...album, title: `${album.title} 🖇`}))
+
+  const combinedAlbums: string[] = [
+    ...hhhAlbums,
+    ...combinedAdjacentAlbums
   ].sort((a, b) => b.ups - a.ups)
-  .map(track => track.title)
+  .map(album => album.title)
 
   const albums = uniqWith(combinedAlbums, (a, b) => {
     const similarity = compareTwoStrings(a, b)

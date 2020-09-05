@@ -10,13 +10,39 @@ const spotify = new SpotifyWebApi({
   clientSecret: SPOTIFY_CLIENT_SECRET
 })
 
-export const getSpotifyData = async () => {
-  const data = await spotify.getNewReleases({
-    country: 'CA',
-    limit: 80
-  }).then(_data => {
-    console.log(_data.body)
-    return _data
+const setAccessToken = (): Promise<any> => {
+  return new Promise((res, rej) => {
+    spotify.clientCredentialsGrant().then(
+      data => {
+        // Save the access token so that it's used in future calls
+        spotify.setAccessToken(data.body['access_token'])
+        res()
+      },
+      rej
+    )
   })
-  console.log(data)
+}
+
+const getNewReleases = async (): Promise<any> => {
+  return new Promise((res, rej) => {
+    spotify.getNewReleases({
+      country: 'CA',
+      limit: 50
+    }).then(
+      data => {
+        console.log(data.body.albums.items)
+        res()
+      },
+      rej
+    )
+  })
+}
+
+export const getSpotifyData = async () => {
+  try {
+    await setAccessToken()
+    await getNewReleases()
+  } catch (e) {
+    console.log(e)
+  }
 }

@@ -7,18 +7,18 @@ import { write } from 'fs'
 
 async function run() {
   try {
-    let { tracks, albums } = await getRedditData()
+    // let { tracks, albums } = await getRedditData()
 
-    tracks = tracks.map(formatTitle)
-    albums = albums.map(formatTitle)
+    // tracks = tracks.map(formatTitle)
+    // albums = albums.map(formatTitle)
     
-    await writeData(tracks, albums)
+    // await writeData(tracks, albums)
 
     // const singlesData = redditDataToNameAndArtist(tracks, false)
     // const albumData = redditDataToNameAndArtist(albums, true)
     // await writeList(singles, albums)
 
-    // await getSpotifyData()
+    await getSpotifyData()
 
   } catch (e) {
     console.log(e)
