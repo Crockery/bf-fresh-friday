@@ -1,8 +1,9 @@
 import { getRedditData } from '../lib/reddit'
-import { writeList } from '../lib/post'
+import { writeData } from '../lib/post'
 import { getSpotifyData } from '../lib/spotify'
 
 import { formatTitle, redditDataToNameAndArtist } from '../helpers'
+import { write } from 'fs'
 
 async function run() {
   try {
@@ -10,12 +11,11 @@ async function run() {
 
     tracks = tracks.map(formatTitle)
     albums = albums.map(formatTitle)
+    
+    await writeData(tracks, albums)
 
-    console.log(tracks)
-
-    const singlesData = redditDataToNameAndArtist(tracks, false)
-    const albumData = redditDataToNameAndArtist(albums, true)
-
+    // const singlesData = redditDataToNameAndArtist(tracks, false)
+    // const albumData = redditDataToNameAndArtist(albums, true)
     // await writeList(singles, albums)
 
     // await getSpotifyData()

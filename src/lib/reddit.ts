@@ -50,12 +50,6 @@ const getTracks = (sub: snoowrap.Subreddit): Promise<snoowrap.Submission[]> => {
         )
         
       resolve(posts)
-      // resolve(uniqWith(posts, (a, b) => {
-      //   const similarity = compareTwoStrings(a, b)
-      //   if (similarity > 0.85) console.log(a, b)
-      //   return similarity > 0.85
-      // }))
-
     }).catch(e => reject(e))
   })
 }
@@ -83,36 +77,33 @@ const getAlbums = (sub: snoowrap.Subreddit): Promise<snoowrap.Submission[]> => {
         )
         
       resolve(posts)
-      // resolve(uniqWith(posts, (a, b) => {
-      //   const similarity = compareTwoStrings(a, b)
-      //   if (similarity > 0.85) console.log(a, b)
-      //   return similarity > 0.85
-      // }))
-      //.sort((a, b) => b.ups - a.ups)
-
     }).catch(e => reject(e))
   })
 }
 
 const getHipHopHeads = async (): Promise<SubRedditResponse> => {
+  console.log('GETTING HIPHOPHEADS')
   const tracks = await getTracks(hiphopheads)
   const albums = await getAlbums(hiphopheads)
   return { tracks, albums }
 }
 
 const getPopHeads = async (): Promise<SubRedditResponse> => {
+  console.log('GETTING POPHEADS')
   const tracks = await getTracks(popheads)
   const albums = await getAlbums(popheads)
   return { tracks, albums }
 }
 
 const getIndieHeads = async (): Promise<SubRedditResponse> => {
+  console.log('GETTING INDIEHEADS')
   const tracks = await getTracks(indieheads)
   const albums = await getAlbums(indieheads)
   return { tracks, albums }
 }
 
 const getPcMusic = async (): Promise<SubRedditResponse> => {
+  console.log('GETTING PCMUSIC')
   const tracks = await getTracks(pcmusic)
   const albums = await getAlbums(pcmusic)
   return { tracks, albums }
@@ -134,7 +125,6 @@ export const getRedditData = async (): Promise<{ tracks: string[], albums: strin
 
   const tracks = uniqWith(combinedTracks, (a, b) => {
     const similarity = compareTwoStrings(a, b)
-    if (similarity > 0.85) console.log(a, b)
     return similarity > 0.85
   })
 
@@ -148,7 +138,6 @@ export const getRedditData = async (): Promise<{ tracks: string[], albums: strin
 
   const albums = uniqWith(combinedAlbums, (a, b) => {
     const similarity = compareTwoStrings(a, b)
-    if (similarity > 0.85) console.log(a, b)
     return similarity > 0.85
   })
 
